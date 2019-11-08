@@ -102,6 +102,29 @@ class GameFragment : Fragment() {
     }
 
     private fun open(row: Int, col: Int) {
+        if (bombMatrix.board[row][col] == 1) {
+            board[row][col].setImageResource(R.drawable.num1)
+            board[row][col].state = StateType.OPEN
+           // board[row][col].visibility = View.INVISIBLE
+            return
+        }
+        if (bombMatrix.board[row][col] == 2) {
+            board[row][col].setImageResource(R.drawable.num2)
+            board[row][col].state = StateType.OPEN
+            // board[row][col].visibility = View.INVISIBLE
+            return
+        }
+        if (bombMatrix.board[row][col] == 3) {
+            board[row][col].setImageResource(R.drawable.num3)
+            board[row][col].state = StateType.OPEN
+            // board[row][col].visibility = View.INVISIBLE
+            return
+        }
+        if (bombMatrix.board[row][col] == -1) {
+            board[row][col].setImageResource(R.drawable.bomb)
+            board[row][col].state = StateType.OPEN
+            return
+        }
         if (!bombMatrix.isValid(row, col)) {
             return
         }
@@ -112,8 +135,7 @@ class GameFragment : Fragment() {
         for (i in row -1 .. row + 1) {
             for (j in col -1 .. col +1) {
                 if (bombMatrix.isValid(i,j)) {
-                    if (!(i == row && j == col) &&
-                        board[i][j].state == StateType.CLOSED) {
+                    if (!(i == row && j == col) && board[i][j].state == StateType.CLOSED) {
                         open(i, j)
                     }
                 }
