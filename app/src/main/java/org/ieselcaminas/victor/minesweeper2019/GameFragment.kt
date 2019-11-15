@@ -45,7 +45,7 @@ class GameFragment : Fragment() {
         var args = GameFragmentArgs.fromBundle(arguments!!)
         numRows = args.numRows
         numCols = args.numCols
-        bombMatrix = BombMatrix(numRows, numCols, (numRows * numCols) / 6)
+        bombMatrix = BombMatrix(numRows, numCols, 5) // (numRows * numCols) / 6
         Toast.makeText(context, "Rows = $numRows Cols = $numCols",
             Toast.LENGTH_LONG).show()
 
@@ -116,6 +116,12 @@ class GameFragment : Fragment() {
         }
         if (bombMatrix.board[row][col] == 3) {
             board[row][col].setImageResource(R.drawable.num3)
+            board[row][col].state = StateType.OPEN
+            // board[row][col].visibility = View.INVISIBLE
+            return
+        }
+        if (bombMatrix.board[row][col] == 4) {
+            board[row][col].setImageResource(R.drawable.num4)
             board[row][col].state = StateType.OPEN
             // board[row][col].visibility = View.INVISIBLE
             return
