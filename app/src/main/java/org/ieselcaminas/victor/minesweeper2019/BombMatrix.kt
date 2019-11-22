@@ -3,7 +3,7 @@ package org.ieselcaminas.victor.minesweeper2019
 import android.opengl.ETC1.isValid
 import kotlin.random.Random
 
-class BombMatrix(val numRows: Int, val numCols: Int, numBombs: Int ) {
+class BombMatrix(val numRows: Int, val numCols: Int, numBombs: Int) {
 
     val BOMB_INT = -1
     lateinit var board: Array<Array<Int>>
@@ -20,8 +20,8 @@ class BombMatrix(val numRows: Int, val numCols: Int, numBombs: Int ) {
     }
 
     private fun calculateNumbers() {
-        for (row in 0 .. numRows-1) {
-            for (col in 0 .. numCols-1) {
+        for (row in 0..numRows - 1) {
+            for (col in 0..numCols - 1) {
                 if (board[row][col] != BOMB_INT) {
                     calculateNumbers(row, col)
                 }
@@ -31,7 +31,7 @@ class BombMatrix(val numRows: Int, val numCols: Int, numBombs: Int ) {
 
     private fun calculateNumbers(row: Int, col: Int) {
         var counter = 0
-        for (i in col-1 .. col+1) {
+        for (i in col - 1..col + 1) {
             for (j in row - 1..row + 1) {
                 if (!(i == col && j == row)) {
                     if (isValid(j, i)) {
@@ -63,16 +63,16 @@ class BombMatrix(val numRows: Int, val numCols: Int, numBombs: Int ) {
             val colAlea = Random.nextInt(0, numCols)
             if (board[rowAlea][colAlea] != BOMB_INT) {
                 board[rowAlea][colAlea] = BOMB_INT
-                counter ++
+                counter++
 
             }
         }
     }
 
     private fun printBoard() {
-        for (row in 0 .. board.size - 1) {
-            for (col in 0 .. board[0].size - 1) {
-                print( " ${board[row][col]} ")
+        for (row in 0..board.size - 1) {
+            for (col in 0..board[0].size - 1) {
+                print(" ${board[row][col]} ")
             }
             println()
         }

@@ -10,33 +10,31 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getDrawable
 
-const val SIZE = 50
+const val SIZE = 100
 
-class MineButton(context: Context, var row: Int, var col: Int): ImageButton(context) {
+class MineButton(context: Context, var row: Int, var col: Int) : ImageButton(context) {
 
-    //var row: Int = row
-    //var col: Int = col
-
-    public var state: StateType = StateType.CLOSED
-    public var imageView: ImageView? = null
+    var state: StateType = StateType.CLOSED
+    var imageView: ImageView? = null
 
     init {
 
         layoutParams = LinearLayout.LayoutParams(SIZE, SIZE)
 
-        setPadding(0,0,0,0)
+        setPadding(0, 0, 0, 0)
         scaleType = ImageView.ScaleType.CENTER
         adjustViewBounds = true
 
-        //setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag))
         setBackground(getDrawable(context, R.drawable.boton))
         setOnTouchListener() { view: View, event: MotionEvent ->
+
             val button: MineButton = view as MineButton
             if (event.action == MotionEvent.ACTION_DOWN) {
                 button.background = getDrawable(context, R.drawable.boton_pressed)
             } else {
                 if (event.action == MotionEvent.ACTION_UP ||
-                        event.action == MotionEvent.ACTION_CANCEL) {
+                    event.action == MotionEvent.ACTION_CANCEL
+                ) {
                     button.background = getDrawable(context, R.drawable.boton)
                 }
             }
@@ -45,13 +43,16 @@ class MineButton(context: Context, var row: Int, var col: Int): ImageButton(cont
 
         setOnLongClickListener {
             when (state) {
-                StateType.CLOSED -> { state = StateType.FLAG
-                    setImageDrawable(ContextCompat.getDrawable(context, R.drawable.flag))
+                StateType.CLOSED -> {
+                    state = StateType.FLAG
+                    setImageDrawable(getDrawable(context, R.drawable.flag))
                 }
-                StateType.FLAG -> { state = StateType.QUESTION
-                    setImageDrawable(ContextCompat.getDrawable(context, R.drawable.question))
+                StateType.FLAG -> {
+                    state = StateType.QUESTION
+                    setImageDrawable(getDrawable(context, R.drawable.question))
                 }
-                StateType.QUESTION -> { state = StateType.CLOSED
+                StateType.QUESTION -> {
+                    state = StateType.CLOSED
                     setImageDrawable(null)
                 }
             }
@@ -59,8 +60,6 @@ class MineButton(context: Context, var row: Int, var col: Int): ImageButton(cont
 
 
         }
-
-
 
 
     }

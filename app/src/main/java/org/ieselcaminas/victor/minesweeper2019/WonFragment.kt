@@ -27,7 +27,7 @@ class WonFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.share -> shareSuccess()
         }
         return super.onOptionsItemSelected(item)
@@ -42,8 +42,10 @@ class WonFragment : Fragment() {
         //var args = GameWonFragmentArgs.fromBundle(arguments!!)
         val shareIntent = Intent(Intent.ACTION_SEND)
         shareIntent.setType("text/plain")
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-            getString(R.string.share_success_text))
+        shareIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            getString(R.string.share_success_text)
+        )
         return shareIntent
     }
 
